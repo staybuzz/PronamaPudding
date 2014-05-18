@@ -31,6 +31,8 @@ window.onload = function() {
 		//プリンの位置
 		pudding.x = 200;
 		pudding.y = 200;
+		//プリン拡大
+		pudding.scale(1.5, 2);
 
 		// 画像のX方向の反転
 		// scaleX = 1 -> 左向き（標準）
@@ -49,7 +51,7 @@ window.onload = function() {
 				pronama.scaleX = -1;
 				this.x += 5;
 			}
-			//　プロ生ちゃんが逃げて消えないようにする
+			//　プロ生ちゃんが逃げていなくならないようにする
 			if (this.x > 500) this.x = 1;
 			if (this.y > 500) this.y = 1;
 			if (this.x < 0) this.x = 500;
@@ -60,6 +62,27 @@ window.onload = function() {
 
 			// Label情報
 			label.text = this.scaleX;
+		})
+
+		// プロ生ちゃんがプリンに体当たりしたときプリンを揺らす
+		// ref: http://blog.livedoor.jp/kamikaze_cyclone/archives/33615748.html
+		var num = 1;   // アニメーションの制御用
+		var count = 0; // 5フレームごとにプリンのframeを切り替えるための変数
+		pudding.addEventListener('enterframe', function(){
+			if (this.within(pronama, 100)) {
+				if (count == 5) {
+	                // カウンターを戻す
+	                count = 0;
+	                // 符号を反転させることで規則的に処理をするようにする
+	                if (this.frame == 2 || this.frame == 0) {
+	                    num *= -1;
+	                }
+	                // フレームの画像の切り替え
+	                this.frame += num;
+            	}
+	            // カウンタを進める
+	            count++;
+	        }
 		})
 
 		// Label
