@@ -2,12 +2,14 @@
 enchant();
 
 // Environments
-var FPS = 15;
+var FPS = 30;
 var pronamaPic = "./pic/pronama.png"
+var puddingPic = "./pic/pudding.png"
 
 window.onload = function() {
 	var core = new Core(500,500);
 	core.preload(pronamaPic);
+	core.preload(puddingPic);
 	core.fps = FPS;
 
 	core.onload = function(){
@@ -16,10 +18,20 @@ window.onload = function() {
 		var pronama = new Sprite(32,48);
 		pronama.image = core.assets[pronamaPic];
 
+		// 各フレームのサイズ ==> 64x128
+		// 3フレーム
+		var pudding = new Sprite(128,64);
+		pudding.image = core.assets[puddingPic];
+		pudding.frame = 1;
+
 		// プロ生ちゃんの初期位置
 		pronama.x = 0;
 		pronama.y = 0;
-		
+
+		//プリンの位置
+		pudding.x = 200;
+		pudding.y = 200;
+
 		// 画像のX方向の反転
 		// scaleX = 1 -> 左向き（標準）
 		// scaleX = -1 -> 右向き
@@ -59,6 +71,7 @@ window.onload = function() {
 
 		var scene = core.rootScene;
 		scene.addChild(pronama);
+		scene.addChild(pudding);
 		scene.addChild(label);
 	}
 
