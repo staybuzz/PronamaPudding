@@ -59,9 +59,6 @@ window.onload = function() {
 
 			// x方向移動の度にフレームを変える
 			this.frame = this.x % 6;
-
-			// Label情報
-			label.text = this.scaleX;
 		})
 
 		// プロ生ちゃんがプリンに体当たりしたときプリンを揺らす
@@ -85,17 +82,9 @@ window.onload = function() {
 	        }
 		})
 
-		// Label
-		var label = new Label();
-		label.x = 300;
-		label.y = 5;
-		label.color = 'red';
-		label.font = '14px';
-
 		var scene = core.rootScene;
 		scene.addChild(pronama);
 		scene.addChild(pudding);
-		scene.addChild(label);
 	}
 
 	core.start();
